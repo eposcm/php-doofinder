@@ -2,6 +2,7 @@
 
 namespace Doofinder\Api\Management;
 
+use Doofinder\Api\Custom\Polyfill;
 use Doofinder\Api\Management\SearchEngine;
 
 
@@ -34,7 +35,8 @@ class ItemsResultSet implements \Iterator {
     $this->total = null;
     $this->resultsPage = null;
     $this->fetchResultsAndTotal();
-    $this->currentItem = each($this->resultsPage);
+    // $this->currentItem = each($this->resultsPage);
+    $this->currentItem = Polyfill::each($this->resultsPage);
   }
 
   public function valid() {
@@ -51,10 +53,12 @@ class ItemsResultSet implements \Iterator {
 
   public function next() {
     ++$this->position;
-    $this->currentItem = each($this->resultsPage);
+    // $this->currentItem = each($this->resultsPage);
+    $this->currentItem = Polyfill::each($this->resultsPage);
     if (!$this->currentItem && $this->position < $this->total) {
       $this->fetchResultsAndTotal();
-      $this->currentItem = each($this->resultsPage);
+      // $this->currentItem = each($this->resultsPage);
+      $this->currentItem = Polyfill::each($this->resultsPage);
     }
   }
 }

@@ -2,6 +2,7 @@
 
 namespace Doofinder\Api\Management;
 
+use Doofinder\Api\Custom\Polyfill;
 use Doofinder\Api\Management\SearchEngine;
 use Doofinder\Api\Management\ItemsResultSet;
 
@@ -44,7 +45,8 @@ class AggregatesIterator extends ItemsResultSet {
       $this->resultsPage = $apiResponse['response']['aggregates'];
       $this->total = $apiResponse['response']['count'];
       $this->last_page++;
-      $this->currentItem = each($this->resultsPage);
+      // $this->currentItem = each($this->resultsPage);
+      $this->currentItem = Polyfill::each($this->resultsPage);
     } catch (NotFound $nfe) {
       $this->resultsPage = array();
     }

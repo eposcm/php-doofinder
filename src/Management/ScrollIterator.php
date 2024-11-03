@@ -2,6 +2,7 @@
 
 namespace Doofinder\Api\Management;
 
+use Doofinder\Api\Custom\Polyfill;
 use Doofinder\Api\Management\SearchEngine;
 use \Doofinder\Api\Management\ItemsResultSet;
 
@@ -37,7 +38,8 @@ class ScrollIterator extends ItemsResultSet {
     $this->total = $apiResults['response']['count'];
     $this->scrollId = $apiResults['response']['scroll_id'];
     $this->resultsPage = $apiResults['response']['results'];
-    $this->currentItem = each($this->resultsPage);
+    // $this->currentItem = each($this->resultsPage);
+    $this->currentItem = Polyfill::each($this->resultsPage);
 
     reset($this->resultsPage);
   }
