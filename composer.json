@@ -30,6 +30,9 @@
     "php-mock/php-mock-phpunit": "1.1.*"
   },
   "autoload": {
+    "exclude-from-classmap": [
+       "src/Test/**"
+    ],
     "psr-4": {
       "Doofinder\\Api\\": "src/"
     }
